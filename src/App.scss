@@ -1,0 +1,41 @@
+@mixin flexBox($direction, $justify, $align){
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+$main-color:  #1db954;
+
+.App {
+  @include flexBox(column, center, center);
+  text-align: center;
+  background: white;
+  color: black;
+  height: 100vh;
+  h1{
+    font-size: 7em;
+  }
+  a.connect__btn{
+    text-decoration: none;
+    background: $main-color;
+    font-size: 12px;
+    line-height: 1;
+    border-radius: 500px;
+    padding: 16px 48px 18px;
+    outline: none;
+    color: white;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 5px;
+    &:hover{
+      color:#fff;
+      background-color:#1ed760;
+    }
+  }
+  a.connect__info{
+    color: #666;
+    margin: 20px;
+    font-size: 13px;
+  }
+}
