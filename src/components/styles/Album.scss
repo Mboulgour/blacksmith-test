@@ -1,0 +1,51 @@
+@mixin flexBox($direction, $justify, $align){
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+$main-color:  #1db954;
+
+.album__container{
+  align-self: flex-start;
+  margin: 10px;
+  color: white;
+  img{
+    height: 300px;
+    width: 300px;
+  }
+}
+
+.album__info{
+  @include flexBox(column, flex-start, center);
+  max-width: 300px;
+}
+
+.album__listen{
+  height: 100%;
+  display: block;
+  position: relative;
+  &:hover{
+    opacity: .5;
+  }
+}
+
+.album__title{
+  margin: 12px 0 4px;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: center;
+  display: block;
+  font-weight: 400;
+}
+
+.album__artist{
+  color: #666;
+  margin: 0;
+}
+
+@media screen and (max-width: ){
+
+}
