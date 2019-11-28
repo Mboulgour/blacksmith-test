@@ -15,8 +15,9 @@ const scopes = [
   
 const App = () =>{
   const [token, setToken] = useState(null)
-  const [album, setAlbum] = useState([])
-  const [albumCover, setAlbumCover] = useState([])
+  const [artist, setArtist] = useState([])
+  const [artistImg, setArtistImg] = useState([])
+  const [artistAlbums, setArtistAlbums] = useState([])
 
   useEffect(() =>{  
     let _token = hash.access_token;
@@ -26,8 +27,9 @@ const App = () =>{
   }, []);
 
   useEffect(() => {
-    const fetchAlbumData = (token) => {
-      const url = "https://api.spotify.com/v1/albums/1lZahjeu4AhPkg9JARZr5F"
+    // Fetching artist
+    const fetchArtistData = (token) => {
+      const url = "https://api.spotify.com/v1/artists/36QJpDe2go2KgaRleHCDTp"
       const config = {
         method: "GET",
         headers: {
@@ -40,14 +42,38 @@ const App = () =>{
       fetch(url, config)
         .then(res => res.json())
         .then(data => {
-          setAlbum(data)
-          setAlbumCover(data.images[1].url)
+          setArtist(data)
+          setArtistImg(data.images[1].url)
         })
     }
     if(token){
-      fetchAlbumData(token)
+      fetchArtistData(token)
     }
-  }, [token])
+  }, [token]);
+
+  useEffect(() => {
+    // Fetching albums from artist
+    const fetchArtistAlbumsData = (token) => {
+      const url = "https://api.spotify.com/v1/artists/36QJpDe2go2KgaRleHCDTp/albums"
+      const config = {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+          "Authorization": `Bearer ${token}`
+        }
+      };
+      // Make a call using the token
+      fetch(url, config)
+        .then(res => res.json())
+        .then(data => {
+          setArtistAlbums(data)
+        })
+    }
+    
+    fetchArtistAlbumsData(token)
+
+  }, [token]);
 
   return (
     <div className="App">
@@ -63,11 +89,22 @@ const App = () =>{
         </>
       )}
       {token && (
+        <>
         <div>
-          {album.name}
-          {console.log(album)}
-          {{albumCover} && (<img src={albumCover} alt={album.name} />)}
+          {artist.name}
         </div>
+        <div>
+          {{artistImg} && (<img src={artistImg} alt={artist.name} />)}
+        </div>
+        <div>
+          {artistAlbums.items && artistAlbums.items.map(album => 
+            <ul>
+              <li>{album.name}</li>
+              <li><img src={album.images[1].url} alt={album.name}/></li>
+            </ul>
+          )}
+        </div>
+        </>
       )}
     </div>
   );
