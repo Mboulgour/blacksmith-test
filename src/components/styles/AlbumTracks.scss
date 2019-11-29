@@ -16,18 +16,21 @@ $main-color:  #1db954;
   height: 100vh;
   overflow-y: scroll;
   float: right;
-  padding: 100px;
+  padding: 100px 150px;
 }
 
 .tracks__list{
   @include flexBox(column, flex-start, flex-start);
-  margin-left: auto;
+  margin-left: 300px;
 }
 
 .track__container{
-  
-  .track__title{
+  .track__header{
+    @include flexBox(row, flex-start, center);
     margin: 0 0 5px 0;
+    .track__title{
+      margin-left: 15px;
+    }
   }
   .track__artist{
     margin: 0 0 5px 0;

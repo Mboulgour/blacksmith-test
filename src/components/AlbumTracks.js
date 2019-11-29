@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import ReactHowler from 'react-howler'
 import hash from "../hash";
 import fetchConfig from "../fetchConfig";
 import axios from 'axios';
@@ -13,6 +14,8 @@ const AlbumTracks = (props) =>{
   const [loading, setLoading] = useState(true)
   const [albumTracks, setAlbumTracks] = useState([])
   const [album, setAlbum] = useState([])
+  const [trackPreview, setTrackPreview] = useState(null)
+  const [playing, setPlaying] = useState(false)
   const { match } = props;
   let albumId = match.params.id;
 
@@ -24,7 +27,7 @@ const AlbumTracks = (props) =>{
   }, [token]);
 
   useEffect( () => {
-    const fetchAlbumData = async (token) => {
+    const fetchAlbumData = async () => {
       const url = `https://api.spotify.com/v1/albums/${albumId}`;
       const result = await axios(url, fetchConfig);
       setAlbum(result.data);
@@ -35,7 +38,7 @@ const AlbumTracks = (props) =>{
 
 
   useEffect( () => {
-    const fetchAlbumTracksData = async (token) => {
+    const fetchAlbumTracksData = async () => {
       const url = `https://api.spotify.com/v1/albums/${albumId}/tracks`;
       const result = await axios(url, fetchConfig);
       setAlbumTracks(result.data);
@@ -44,18 +47,30 @@ const AlbumTracks = (props) =>{
     fetchAlbumTracksData(token);
   }, [token, albumId]);
 
-
   return (
     <>
       {!loading && (
         <div className="tracks__wrapper">
           <Album {...album} />
-          <div class="tracks__list">
-          {albumTracks.items && albumTracks.items.map(track => 
-            <Track {...track} />
-          )}
+          <div className="tracks__list">
+            {albumTracks.items && albumTracks.items.map((track, index) => 
+              <div className="track__container" onClick={() => {
+                  setTrackPreview(track.preview_url); 
+                  setPlaying(trackPreview === track.preview_url ? false : true)
+                }
+              }>
+                <Track {...track} key={index} index={index + 1} />
+              </div>
+            )}
           </div>
         </div>
+      )}
+      {trackPreview && (
+        <ReactHowler
+          src={trackPreview}
+          format={['mp3']}
+          playing={playing ? true : false}
+        />
       )}
     </>
   )
