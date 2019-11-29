@@ -1,0 +1,38 @@
+@mixin flexBox($direction, $justify, $align){
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+$main-color:  #1db954;
+
+.tracks__wrapper{
+  @include flexBox(row, flex-start, flex-start);
+  background: black;
+  color: white;
+  text-align: center;
+  width: 85%;
+  height: 100vh;
+  overflow-y: scroll;
+  float: right;
+  padding: 100px;
+}
+
+.tracks__list{
+  @include flexBox(column, flex-start, flex-start);
+  margin-left: auto;
+}
+
+.track__container{
+  
+  .track__title{
+    margin: 0 0 5px 0;
+  }
+  .track__artist{
+    margin: 0 0 5px 0;
+    color: #666;
+    font-size: .9em;
+    text-align: left;
+  }
+}

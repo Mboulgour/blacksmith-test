@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import hash from "../hash";
+import fetchConfig from "../fetchConfig";
+import axios from 'axios';
 
 import Album from './Album'
 
@@ -19,12 +21,12 @@ const Home = () =>{
 
   // State
   const [token, setToken] = useState(null)
+  const [loading, setLoading] = useState(true)
   const [artist, setArtist] = useState([])
-  const [artistImg, setArtistImg] = useState([])
   const [artistAlbums, setArtistAlbums] = useState([])
 
   // URL variables
-  const artistId = '36QJpDe2go2KgaRleHCDTp'
+  const artistId = '22WZ7M8sxp5THdruNY3gXt'
 
   useEffect(() =>{  
     let _token = hash.access_token;
@@ -33,53 +35,25 @@ const Home = () =>{
     }
   }, []);
 
-  useEffect(() => {
-    // Fetching artist
-    const fetchArtistData = (token) => {
-      const url = `https://api.spotify.com/v1/artists/${artistId}`
-      const config = {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          "Accept": "application/json",
-          "Authorization": `Bearer ${token}`
-        }
-      };
-      // Make a call using the token
-      fetch(url, config)
-        .then(res => res.json())
-        .then(data => {
-          setArtist(data)
-          setArtistImg(data.images[1].url)
-        })
-    }
-    if(token){
-      fetchArtistData(token)
-    }
+  useEffect( () => {
+    const fetchArtistData = async (token) => {
+      const url = `https://api.spotify.com/v1/artists/${artistId}`;
+      const result = await axios(url, fetchConfig);
+      setArtist(result.data);
+      setLoading(false);
+    };
+    fetchArtistData(token);
   }, [token]);
 
-  useEffect(() => {
-    // Fetching albums from artist
-    const fetchArtistAlbumsData = (token) => {
-      const url = `https://api.spotify.com/v1/artists/${artistId}/albums`
-      const config = {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          "Accept": "application/json",
-          "Authorization": `Bearer ${token}`
-        }
-      };
-      // Make a call using the token
-      fetch(url, config)
-        .then(res => res.json())
-        .then(data => {
-          setArtistAlbums(data)
-        })
-    }
-    
-    fetchArtistAlbumsData(token)
 
+  useEffect( () => {
+    const fetchArtistAlbumsData = async (token) => {
+      const url = `https://api.spotify.com/v1/artists/${artistId}/albums`;
+      const result = await axios(url, fetchConfig);
+      setArtistAlbums(result.data);
+      setLoading(false);
+    };
+    fetchArtistAlbumsData(token);
   }, [token]);
 
   return (
@@ -98,17 +72,17 @@ const Home = () =>{
       )}
       
       {/* Connected content */}
-      {token && (
+      {token && !loading && (
         <div className="artist__wrapper">
           <div className="artist__header">
             <h1 className="artist__title">
               {artist.name}
             </h1>
-            {{artistImg} && (<img  className="artist__img" src={artistImg} alt={artist.name} />)}
+            <img  className="artist__img" src={artist.images[1].url} alt={artist.name} />
           </div>
           <div className="album__list">
             {artistAlbums.items && artistAlbums.items.map(album => 
-              <Album {...album} {...token} />
+              <Album {...album}/>
             )}
           </div>
         </div>

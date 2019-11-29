@@ -1,9 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import hash from "../hash";
+import fetchConfig from "../fetchConfig";
+import axios from 'axios';
+
+import Album from './Album';
+import Track from './Track';
+import './styles/AlbumTracks.scss';
+// import './styles/AlbumTracks.scss';
 
 const AlbumTracks = (props) =>{
   const [token, setToken] = useState(null)
+  const [loading, setLoading] = useState(true)
   const [albumTracks, setAlbumTracks] = useState([])
+  const [album, setAlbum] = useState([])
   const { match } = props;
   let albumId = match.params.id;
 
@@ -12,42 +21,44 @@ const AlbumTracks = (props) =>{
     if (_token) {
       setToken(_token);
     }
-    console.log(token)
   }, [token]);
 
-  useEffect(() => {
-    // Fetching AlbumTracks
-    const fetchAlbumTracksData = (token) => {
-      const url = `https://api.spotify.com/v1/albums/${albumId}/tracks`
-      const config = {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          "Accept": "application/json",
-          "Authorization": `Bearer ${token}`
-        }
-      };
-      // Make a call using the token
-      fetch(url, config)
-        .then(res => res.json())
-        .then(data => {
-          setAlbumTracks(data)
-        })
-    }
-    if(token){
-      fetchAlbumTracksData(token)
-    }
+  useEffect( () => {
+    const fetchAlbumData = async (token) => {
+      const url = `https://api.spotify.com/v1/albums/${albumId}`;
+      const result = await axios(url, fetchConfig);
+      setAlbum(result.data);
+      setLoading(false);
+    };
+    fetchAlbumData(token);
+  }, [token, albumId]);
+
+
+  useEffect( () => {
+    const fetchAlbumTracksData = async (token) => {
+      const url = `https://api.spotify.com/v1/albums/${albumId}/tracks`;
+      const result = await axios(url, fetchConfig);
+      setAlbumTracks(result.data);
+      setLoading(false);
+    };
+    fetchAlbumTracksData(token);
   }, [token, albumId]);
 
 
   return (
-    <div>
-      {albumId}
-      {albumTracks.items && albumTracks.items.map(track => 
-        <li>{track.name}</li>
+    <>
+      {!loading && (
+        <div className="tracks__wrapper">
+          <Album {...album} />
+          <div class="tracks__list">
+          {albumTracks.items && albumTracks.items.map(track => 
+            <Track {...track} />
+          )}
+          </div>
+        </div>
       )}
-    </div>
-  );
+    </>
+  )
 }
 
 export default AlbumTracks;
