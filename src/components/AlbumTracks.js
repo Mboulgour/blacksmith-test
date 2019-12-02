@@ -57,7 +57,7 @@ const AlbumTracks = (props) =>{
           <Album {...album} />
           <div className="tracks__list">
             {albumTracks.items && albumTracks.items.map((track, index) => 
-              <div className={track.preview_url === trackPreview && playing ? "track__container active" : "track__container"} onClick={() => {
+              <div key={index} className={track.preview_url === trackPreview && playing ? "track__container active" : "track__container"} onClick={() => {
                   setTrackPreview(track.preview_url); 
                   setPlaying(trackPreview === track.preview_url ? false : true)
                 }
@@ -79,7 +79,7 @@ const AlbumTracks = (props) =>{
           <div className="player__now_playing">
             <div className="player__title">Now playing:</div> 
             {trackPreview && albumTracks.items.filter(track => track.preview_url === trackPreview).map(currentTrack =>
-              <p className="player__current_track">{currentTrack.name}</p>
+              <p className="player__current_track" key={currentTrack.id}>{currentTrack.name}</p>
             )}
           </div>
         </div>

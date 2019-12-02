@@ -85,7 +85,7 @@ const Home = () =>{
               </div>
               <div className="album__list">
                 {artistAlbums.items && artistAlbums.items.map(album => 
-                  <Album {...album}/>
+                  <Album {...album} key={album.id}/>
                 )}
               </div>
             </div>
