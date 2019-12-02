@@ -40,33 +40,57 @@ $main-color:  #1db954;
   }
 }
 
+.home__top_container{
+  min-height: 100%;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  grid-template-columns: auto 1fr;
+  grid-template-areas: "nav-bar main-view" "now-playing-bar now-playing-bar";
+}
+
 .artist__wrapper{
-  display: block;
-  background: black;
+  min-height: 100%;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  grid-template-columns: auto 1fr;
+  grid-template-areas: "nav-bar main-view" "now-playing-bar now-playing-bar";
+  background: #000000ef;
   color: white;
-  text-align: center;
-  width: 85%;
-  float: right;
+}
+
+.artist__container{
+  @include flexBox(column, flex-start, flex-start);
 }
 
 .artist__header{
-  @include flexBox(row, center, center);
+  @include flexBox(row, flex-start, center);
   padding: 50px;
+  width: 100%;
 }
 
 .artist__title{
   margin: 0;
   font-size: 10em;
   text-align: center;
+  width: 80%;
+  text-align: left;
 }
 
 .artist__img{
-  border-radius: 100%;
-  padding: 15px;
-  margin-left: auto;
-  width: 236px;
-  height: 236px;
-  object-fit: cover;
+  width: 20%;
+  img{
+    border-radius: 100%;
+    padding: 15px;
+    object-fit: cover;
+    width: 236px;
+    height: 236px;
+  }
 }
 
 .album__list{

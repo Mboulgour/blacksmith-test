@@ -5,6 +5,7 @@ import fetchConfig from "../fetchConfig";
 import axios from 'axios';
 
 import Album from './Album';
+import Menu from './Menu';
 import Track from './Track';
 import './styles/AlbumTracks.scss';
 // import './styles/AlbumTracks.scss';
@@ -49,12 +50,14 @@ const AlbumTracks = (props) =>{
 
   return (
     <>
+      <div className="home__top_container">
+      <Menu />
       {!loading && (
         <div className="tracks__wrapper">
           <Album {...album} />
           <div className="tracks__list">
             {albumTracks.items && albumTracks.items.map((track, index) => 
-              <div className="track__container" onClick={() => {
+              <div className={track.preview_url === trackPreview && playing ? "track__container active" : "track__container"} onClick={() => {
                   setTrackPreview(track.preview_url); 
                   setPlaying(trackPreview === track.preview_url ? false : true)
                 }
@@ -72,6 +75,7 @@ const AlbumTracks = (props) =>{
           playing={playing ? true : false}
         />
       )}
+      </div>
     </>
   )
 }

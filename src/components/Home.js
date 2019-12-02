@@ -4,6 +4,7 @@ import fetchConfig from "../fetchConfig";
 import axios from 'axios';
 
 import Album from './Album'
+import Menu from './Menu'
 
 import './styles/Home.scss';
 
@@ -18,7 +19,6 @@ const scopes = [
 ];
   
 const Home = () =>{
-
   // State
   const [token, setToken] = useState(null)
   const [loading, setLoading] = useState(true)
@@ -26,7 +26,8 @@ const Home = () =>{
   const [artistAlbums, setArtistAlbums] = useState([])
 
   // URL variables
-  const artistId = '22WZ7M8sxp5THdruNY3gXt'
+  const artistArray = ['22WZ7M8sxp5THdruNY3gXt', '36QJpDe2go2KgaRleHCDTp', '47yvARr7dCOKqvjDVwfbf3', '2EaeVm1MjlVtsUV0ebT0vB'];
+  const artistId = artistArray[Math.floor(Math.random()*artistArray.length)]
 
   useEffect(() =>{  
     let _token = hash.access_token;
@@ -36,25 +37,25 @@ const Home = () =>{
   }, []);
 
   useEffect( () => {
-    const fetchArtistData = async (token) => {
+    const fetchArtistData = async () => {
       const url = `https://api.spotify.com/v1/artists/${artistId}`;
       const result = await axios(url, fetchConfig);
       setArtist(result.data);
       setLoading(false);
     };
     fetchArtistData(token);
-  }, [token]);
+  }, []);
 
 
   useEffect( () => {
-    const fetchArtistAlbumsData = async (token) => {
+    const fetchArtistAlbumsData = async () => {
       const url = `https://api.spotify.com/v1/artists/${artistId}/albums`;
       const result = await axios(url, fetchConfig);
       setArtistAlbums(result.data);
       setLoading(false);
     };
     fetchArtistAlbumsData(token);
-  }, [token]);
+  }, []);
 
   return (
     <>
@@ -73,17 +74,22 @@ const Home = () =>{
       
       {/* Connected content */}
       {token && !loading && (
-        <div className="artist__wrapper">
-          <div className="artist__header">
-            <h1 className="artist__title">
-              {artist.name}
-            </h1>
-            <img  className="artist__img" src={artist.images[1].url} alt={artist.name} />
-          </div>
-          <div className="album__list">
-            {artistAlbums.items && artistAlbums.items.map(album => 
-              <Album {...album}/>
-            )}
+        <div className="home__top_container">
+          <Menu />
+          <div className="artist__wrapper">
+            <div className="artist__container">
+              <div className="artist__header">
+                <h1 className="artist__title">
+                  {artist.name}
+                </h1>
+                <div className="artist__img"><img src={artist.images[1].url} alt={artist.name} /></div>
+              </div>
+              <div className="album__list">
+                {artistAlbums.items && artistAlbums.items.map(album => 
+                  <Album {...album}/>
+                )}
+              </div>
+            </div>
           </div>
         </div>
       )}
