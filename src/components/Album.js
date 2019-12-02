@@ -9,7 +9,7 @@ const Album = (album) =>{
     <>
       {album && album.images &&(
         <div className="album__container">
-          <Link to={`album/${album.id}`} className="album__listen">
+          <Link exact to={`/album/${album.id}`} className="album__listen">
             <img src={album.images[1].url} alt={album.name} />
           </Link>
           <div className="album__info">

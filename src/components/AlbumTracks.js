@@ -75,6 +75,14 @@ const AlbumTracks = (props) =>{
           playing={playing ? true : false}
         />
       )}
+        <div className="player__wrapper">
+          <div className="player__now_playing">
+            <div className="player__title">Now playing:</div> 
+            {trackPreview && albumTracks.items.filter(track => track.preview_url === trackPreview).map(currentTrack =>
+              <p className="player__current_track">{currentTrack.name}</p>
+            )}
+          </div>
+        </div>
       </div>
     </>
   )

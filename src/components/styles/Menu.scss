@@ -3,4 +3,84 @@
   background-color: #000000;
   overflow-y: auto;
   width: 230px;
+  color: white;
+  font-family: 'Montserrat', sans-serif;
+  ul{
+    list-style: none;
+    padding-left: 10px;
+    li{
+      padding: 15px;
+      transition: background .6s;
+      &:hover{
+        background: #666;
+        cursor: pointer;
+      }
+    }
+    svg{
+      margin-right: 10px;
+    }
+  }
+}
+
+.menu__title{
+  font-size: 2em;
+  font-weight: 900;
+  padding: 10px;
+}
+
+.menu__nav{
+  width: 100%;
+  a.menu__link{
+    position: relative;
+    &.menu__link--active{
+      &::before{
+        content: "";
+        display: block;
+        position: absolute;
+        top: 30px;
+        left: 0;
+        width: 4px;
+        background-color: #1ed760;
+        height: 100%;
+      }
+    }
+  }
+}
+
+.menu_mobile__container{
+  display: none;
+  background-color:#181818;
+  padding: 15px;
+  color: white;
+  width: 100%;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  max-height: 200px;
+  z-index: 2;
+  .menu_mobile__nav{
+    list-style: none;
+    display: flex;
+    font-size: 2em;
+    margin: 0;
+    list-style: none;
+    text-align: center;
+    padding: 0;
+  }
+  .menu_mobile__link{
+    width: 50%;
+    &.menu_mobile__link--active{
+      color: #1ed760;
+    }
+  }
+}
+
+@media screen and (max-width: 560px){
+  .menu__container{
+    display: none;
+  }
+
+  .menu_mobile__container{
+    display: block;
+  }
 }

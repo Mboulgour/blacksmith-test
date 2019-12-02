@@ -14,3 +14,18 @@ body {
   margin: 0;
   font-family: 'Montserrat', sans-serif;
 }
+
+a{
+  text-decoration: none;
+  color: white;
+  outline: none;
+}
+
+a:focus{
+  outline: none;
+  color: white;
+}
+
+a:visited{
+  color: inherit;
+}

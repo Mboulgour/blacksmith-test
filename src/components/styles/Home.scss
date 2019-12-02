@@ -76,7 +76,7 @@ $main-color:  #1db954;
 
 .artist__title{
   margin: 0;
-  font-size: 10em;
+  font-size: 9em;
   text-align: center;
   width: 80%;
   text-align: left;
@@ -97,4 +97,83 @@ $main-color:  #1db954;
   @include flexBox(row, center, center);
   flex-wrap: wrap;
   padding: 0 50px;
+}
+
+.player__wrapper{
+  background-color:#181818;
+  padding: 25px;
+  color: white;
+  width: 100%;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  max-height: 200px;
+}
+
+.player__now_playing{
+  font-size: 5em;
+  font-weight: 900;
+  @include flexBox(row, flex-start, center);
+}
+
+.player__title{
+  width: 100%;
+}
+
+.player__current_track{
+  margin-left: auto;
+  font-size: .4em;
+  width: 100%;
+  text-align: right;
+}
+
+@media screen and (max-width: 1260px){
+  .player__now_playing{
+    font-size: 3em;
+  }
+}
+
+@media screen and (max-width: 800px){
+  .player__now_playing{
+    font-size: 2em;
+  }
+}
+
+@media screen and (max-width: 560px){
+  .player__wrapper{
+    bottom: 69px;
+  }
+
+  .player__now_playing{
+    font-size: 1em;
+  }
+
+  .player__current_track{
+    font-size: .6em;
+  }
+
+  .album__list{
+    display: block;
+    padding: 0 30px;
+    text-align: center;
+  }
+
+  .home__wrapper h1 {
+    font-size: 4em;
+  } 
+
+  .artist__title {
+    font-size: 3em;
+    width: 100%;
+    text-align: center;
+    margin: 30px 0;
+  }
+
+  .artist__header{
+    padding: 0;
+  }
+
+  .artist__img{
+    display: none;
+  }
 }

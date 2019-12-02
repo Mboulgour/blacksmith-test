@@ -73,3 +73,20 @@ $main-color:  #1db954;
     }
   }
 }
+
+@media screen and (max-width: 560px){
+  .tracks__wrapper{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .tracks__list{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-top: 80px;
+    margin-left: 0;
+    padding: 0 20px;
+  }
+}

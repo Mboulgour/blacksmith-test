@@ -46,6 +46,8 @@ $main-color:  #1db954;
   margin: 0;
 }
 
-@media screen and (max-width: ){
-
+@media screen and (max-width: 560px){
+  .album__container{
+    align-self: center;
+  }
 }
