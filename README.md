@@ -40,4 +40,3 @@
 ![minispotifymobile2](https://user-images.githubusercontent.com/45493113/69961906-22279900-150d-11ea-89f6-d9270cdb052c.png)
 
 ![minispotifymobile3](https://user-images.githubusercontent.com/45493113/69961907-23f15c80-150d-11ea-9362-49984cf814e5.png)
->>>>>>> 83e90fa7e85547c25b2e084d44592d2be1203cad
