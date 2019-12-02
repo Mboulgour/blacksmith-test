@@ -45,7 +45,6 @@ export const UserAlbums = () => {
               <Album {...album.album} />
             )}
           </div>
-          {console.log(userAlbums)}
         </div>
       )} 
       </div>  
