@@ -1,9 +1,5 @@
 # Mini-Spotify
 
-## Test app here
-
-https://mini-spotify.netlify.com/
-
 ## Main features
 
 - Mini-spotify is an app using the **Spotify developers Web-API** : https://developer.spotify.com/documentation/web-api/
