@@ -1,5 +1,8 @@
 # Mini-Spotify
 
+## Test app here
+
+https://mini-spotify.netlify.com/
 
 ## Main features
 
