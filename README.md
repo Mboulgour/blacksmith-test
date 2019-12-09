@@ -1,6 +1,5 @@
 # Mini-Spotify
 
-
 ## Main features
 
 - Mini-spotify is an app using the **Spotify developers Web-API** : https://developer.spotify.com/documentation/web-api/
@@ -12,15 +11,6 @@
 
 - The web player is made with react-howler (https://github.com/thangngoc89/react-howler)
 - It displays the name of the song and a 30seconds mp3 preview of the track.
-
-## Ameliorations
-
-- A clear need to refactor the code (a lot of repetition, a lot of unecessary CSS)
-- Refactor components
-- Implement _styled-components_
-- Use _Redux_ to pass global states and avoid repetition
-- Improve the player design
-- Improve device compatibility (only desktop and mobile styles are set, no in-between)
 
 ## Screenshots
 
@@ -40,4 +30,3 @@
 ![minispotifymobile2](https://user-images.githubusercontent.com/45493113/69961906-22279900-150d-11ea-89f6-d9270cdb052c.png)
 
 ![minispotifymobile3](https://user-images.githubusercontent.com/45493113/69961907-23f15c80-150d-11ea-9362-49984cf814e5.png)
->>>>>>> 83e90fa7e85547c25b2e084d44592d2be1203cad
